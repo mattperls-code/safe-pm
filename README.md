@@ -14,4 +14,16 @@ Since it is not currently on npm, you can do the following:
 
 <br/>
 
+## Tests
+
+**Init Command**
+
+
+
+- [x] Basic init with prompts
+- [x] NPM init -y with existing package.json
+- [x] Change config after -y
+- [x] Install command
+- [x] Uninstall command
+
 Now the commands "safe-pm init" and "safe-pm install" are available

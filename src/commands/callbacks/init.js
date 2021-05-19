@@ -9,8 +9,32 @@ const npmInit = (params) => {
     if(params.trim() == "-y"){
         npmInitDashY()
     } else {
-        prompt.start()
-        prompt.get(["name", "version", "author", "description", "keywords", "license"], (err, res) => {
+        prompt.start({
+            
+        })
+        prompt.get([
+            {
+                name: "name",
+                description: "Name",
+            },
+            {
+                name: "version",
+                description: "Version"
+                
+            },
+            {
+                name: "author",
+                description: "Author"
+            },
+            {
+                name: "description",
+                description: "Description"
+            },
+            {
+                name: "license",
+                description: "License ( Choose MIT )"
+            }
+        ], (err, res) => {
             if(err){ console.error(err) };
             fs.writeFileSync("package.json", JSON.stringify(res, null, 4), {
                 encoding: "utf8"
@@ -21,15 +45,23 @@ const npmInit = (params) => {
 
 const npmInitDashY = () => {
     exec("npm init -y", (error, stdout, stderr) => {
-        console.log(stdout);
+        if(error){
+            console.error(error)
+        }
+        console.log(stdout)
+        console.log(stderr)
         process.exit(0);
     })
 }
 
 const confirmInit = (firstTimeAsking, params) => {
-    console.log(firstTimeAsking ? "The current directory already has a package.json. Would you still like to init? (y/n) " : "Your answer was not valid, please respond with \"y\" or \"n\"")
     prompt.start()
-    prompt.get(["confirm"], (err, res) => {
+    prompt.get([
+        {
+            name: "confirm",
+            description: firstTimeAsking ? "The current directory already has a package.json, and continuing will overwrite it. Would you still like to initialize a new package.json? " : "Your answer was not valid, please respond with \"y\" or \"n\" (y/n)",
+        }
+    ], (err, res) => {
         if(err){
             console.error(err)
         }

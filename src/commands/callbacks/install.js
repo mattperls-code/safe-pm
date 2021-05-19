@@ -15,9 +15,14 @@ const npmInstall = (params) => {
 }
 
 const confirmInstall = (firstTimeAsking, params) => {
-    const question = firstTimeAsking ? "The current directory does not already have a package.json. Would you still like to install? (y/n) " : "Your answer was not valid, please respond with \"y\" or \"n\" "
-    promp.start()
-    prompt.get(["confirm"], (err, res) => {
+    // add option to init instead
+    prompt.start()
+    prompt.get([
+        {
+         name: "confirm",
+            description: firstTimeAsking ? "The current directory does not already have a package.json. Would you still like to install? (y/n) " : "Your answer was not valid, please respond with \"y\" or \"n\" "
+        }
+    ], (err, res) => {
         if(res.confirm == "y"){
             npmInstall(params)
         } else if(res.confirm != "n"){
