@@ -1,19 +1,17 @@
 class Command {
-    constructor(keys, description, isMain, callback){
-        // this.keys must be an array of strings
-        if(typeof keys == "string"){
+    constructor(keys, description, callback) {
+        if (typeof keys == "string") {
             this.keys = [keys]
         } else {
             this.keys = keys
         }
         this.description = description
-        this.isMain = isMain
         this.callback = callback
     }
-    matches(primaryCommand){
+    matches(primaryCommand) {
         return this.keys.includes(primaryCommand)
     }
-    execute(params){
+    execute(params) {
         this.callback(
             typeof params != "string" || params.trim() == "" ? "" : " " + params
         )

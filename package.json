@@ -1,20 +1,59 @@
 {
   "name": "safe-pm",
-  "version": "1.0.1",
-  "description": "",
+  "version": "1.0.0",
+  "description": "NPM Safety and Automation",
+  "keywords": [
+    "safe-pm",
+    "mistake",
+    "correction",
+    "cli",
+    "wrapper",
+    "npm++",
+    "package",
+    "manager",
+    "safe",
+    "pm",
+    "safety",
+    "automation",
+    "scripting",
+    "mattperls-code",
+    "gitter499"
+  ],
   "main": "./src/cli.js",
+  "homepage": "https://github.com/mattperls-code/safe-pm",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mattperls-code/safe-pm"
+  },
+  "bugs": {
+    "url": "https://github.com/mattperls-code/safe-pm",
+    "email": "mattperls.code@gmail.com"
+  },
   "bin": {
     "safe-pm": "./bin/safe-pm.js"
   },
+  "engines" : { 
+    "node" : ">=0.12.*"
+  },
+  "os": [
+    "linux",
+    "darwin",
+    "win32"
+  ],
   "scripts": {
-    "postinstall": "node src/util/welcome.js",
-    "build": "webpack --config webpack.config.js"
+    "postinstall": "node src/util/welcome.js"
   },
   "author": "Matthew Perlman",
+  "contributors": [
+    "Rafayel Amirkhanyan"
+  ],
   "license": "MIT",
   "dependencies": {
+    "child_process": "^1.0.2",
     "colorette": "^1.2.2",
     "figlet": "^1.5.0",
+    "fs": "0.0.1-security",
+    "process": "^0.11.10",
     "prompt": "^1.1.0"
   }
 }
