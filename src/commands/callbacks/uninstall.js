@@ -1,14 +1,19 @@
 const process = require("process")
 const { exec } = require("child_process")
-const packagePresent = require("../../util/packagePresent.js")
+const packagePresent = require("../../util/packagePresent")
+const { log, error } = require("../../util/output")
 
 const npmUninstall = (params) => {
-    exec("npm uninstall" + params, (error, stdout, stderr) => {
-        if(error){
-            console.log(error)
+    exec("npm uninstall" + params, (err, stdout, stderr) => {
+        if(err){
+            error(error)
         }
-        console.log(stdout)
-        console.log(stderr)
+        if(stdout){
+            console.log(stdout)
+        }
+        if(stderr){
+            console.log(stderr)
+        }
         process.exit(0)
     })
 }
@@ -16,7 +21,7 @@ const npmUninstall = (params) => {
 const uninstall = (params) => {
     packagePresent((isPresent) => {
         if(isPresent){
-            console.log("Running \"npm uninstall" + params + "\"")
+            log("Running \"npm uninstall" + params + "\"")
             npmUninstall(params)
         }
     })

@@ -1,28 +1,37 @@
 const process = require("process")
 const { exec } = require("child_process")
-const packagePresent = require("../../util/packagePresent.js")
+const packagePresent = require("../../util/packagePresent")
 const prompt = require("prompt")
+const { log, warn, error } = require("../../util/output")
 
 const npmInstall = (params) => {
-    exec("npm install" + params, (error, stdout, stderr) => {
-        if(error){
-            console.log(error)
+    exec("npm install" + params, (err, stdout, stderr) => {
+        if(err){
+            error(err)
         }
-        console.log(stdout)
-        console.log(stderr)
+        if(stdout){
+            console.log(stdout)
+        }
+        if(stderr){
+            console.log(stderr)
+        }
         process.exit(0)
     })
 }
 
 const confirmInstall = (firstTimeAsking, params) => {
-    // add option to init instead
+    // TODO: add option to init instead
+    warn(firstTimeAsking ? "The current directory does not already have a package.json. Would you still like to install? (y/n) " : "Your answer was not valid, please respond with \"y\" or \"n\" ")
     prompt.start()
     prompt.get([
         {
-         name: "confirm",
-            description: firstTimeAsking ? "The current directory does not already have a package.json. Would you still like to install? (y/n) " : "Your answer was not valid, please respond with \"y\" or \"n\" "
+            name: "confirm",
+            description: "(y/n) "
         }
     ], (err, res) => {
+        if(err){
+            error(err)
+        }
         if(res.confirm == "y"){
             npmInstall(params)
         } else if(res.confirm != "n"){
@@ -34,7 +43,7 @@ const confirmInstall = (firstTimeAsking, params) => {
 const install = (params) => {
     packagePresent((isPresent) => {
         if(isPresent){
-            console.log("Running \"npm install" + params + "\"")
+            log("Running \"npm install" + params + "\"")
             npmInstall(params)
         } else {
             confirmInstall(true, params)

@@ -1,9 +1,10 @@
 const process = require("process")
-const cliCommands = require("./commands/cliCommands.js")
+const cliCommands = require("./commands/cliCommands")
+const { error } = require("./util/output")
 
 const cli = (args) => {
     if(args.length <= 2){
-        console.log("Please Enter A Complete Command. To See A List Of All Commands, Run \"safe-pm help\"")
+        error("Please Enter A Complete Command. To See A List Of Commands, Run \"safe-pm help\"")
         process.exit(0)
     } else {
         const primaryCommand = args[2]
@@ -17,7 +18,7 @@ const cli = (args) => {
             }
         }
         if(!hasMatched){
-            console.log(`No Command "${primaryCommand}" Found`)
+            error(`No Command "${primaryCommand}" Found. To See A List Of Commands, Run \"safe-pm help\"`)
             process.exit(0)
         }
     }

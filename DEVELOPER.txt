@@ -1,0 +1,1 @@
+TODO: add information such as conventions for the program, how to go about contributing, and how other developer information
